@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+h1, h3, h6 {
+    font-family: sans-serif;
+    margin: 10px;
+}
+br{
+    line-height: 0;
+}
+text {
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+.deathsLine{
+    fill:none;
+    stroke: rgb(235,119,38);
+    stroke-width: 3;
+}
+.aidsdxLine{
+    fill:none;
+    stroke: rgb(252,181,26);
+    stroke-width: 3;
+}
+.hivdxLine {
+    fill:none;
+    stroke: rgb(2, 207, 12); 
+    stroke-width: 3;
+}
+.grid line{
+    stroke: lightgrey;
+    opacity: 0.7;
+}
+svg {
+    display: block;
+    margin: auto;
+    float: left;
+}
+
+.tooltip{
+    display: block;
+    text-align: left;
+    width: 120px;
+    height: 50px;
+    border: 10px;
+    background-color: rgba(211, 211, 211, 0.9);
+    font-family: sans-serif;
+    font-size: 12px;
+    position: absolute;
+    padding: 10px;
+}
+.logo{
+    max-width: 25%;
+    height: auto;
+    margin: 0;
+}
+.sidebar{
+    border: 1px;
+    border-color: lightgrey;
+    border-style: solid;
+    float: right;
+    margin: 10px;
+    margin-right: 80px;
+    padding: 10px;
+}
+select{
+    margin-left: 10px;
+}
+#chartsvg{
+    margin-left: 40px;
+}
+div.sidebar h3,h6{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.boxText {
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+}
+.boxBigText{ 
+    fill: white;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
