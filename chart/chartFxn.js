@@ -116,7 +116,7 @@ function chart(){
     ///////////////////////////////////////////////////////
     ///EVERYTHING THAT NEEDS DATA
     ///////////////////////////////////////////////////////
-    d3.csv("data/"+name+".csv").then(function(dataset) {
+    d3.csv("Data/"+name+".csv").then(function(dataset) {
       dataset.forEach((d)=>{
         d.year = +d.year;
         d.deaths = +d.deaths;
