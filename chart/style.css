@@ -1,13 +1,13 @@
 * {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
 }
 h1, h3, h6 {
     font-family: sans-serif;
     margin: 10px;
 }
 br{
-    line-height: 0;
+    line-height: 0px;
 }
 text {
     font-family: sans-serif;
@@ -17,17 +17,17 @@ text {
 .deathsLine{
     fill:none;
     stroke: rgb(235,119,38);
-    stroke-width: 3;
+    stroke-width: 3px;
 }
 .aidsdxLine{
     fill:none;
     stroke: rgb(252,181,26);
-    stroke-width: 3;
+    stroke-width: 3px;
 }
 .hivdxLine {
     fill:none;
     stroke: rgb(2, 207, 12); 
-    stroke-width: 3;
+    stroke-width: 3px;
 }
 .grid line{
     stroke: lightgrey;
@@ -50,12 +50,12 @@ svg {
     font-size: 12px;
     position: absolute;
     padding: 10px;
-    margin: 0;
+    margin: 0px;
 }
 .logo{
     max-width: 25%;
     height: auto;
-    margin: 0;
+    margin: 0px;
 }
 .sidebar{
     border: 1px;
