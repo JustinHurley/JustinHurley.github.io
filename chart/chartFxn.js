@@ -1,7 +1,15 @@
 var margin = {top: 20, right: 100, bottom: 100, left: 70},
     w = window.innerWidth - 400, 
     h = 500;
-var trueDim = {width: window.innerWidth, height: window.innerHeight};
+var trueDim = {width: 0, height: 0};
+function getWindow(){
+  trueDim.width = window.innerWidth;
+  trueDim.height = window.innerHeight;
+  if(trueDim.width < 1180){
+    trueDim.width = 1180;
+  }
+}
+getWindow();
 var topBottom = margin.top + margin.bottom;
 var leftRight = margin.left + margin.right;  
 var mid = {x: w/2, y:h/2};
@@ -79,9 +87,9 @@ function boxes(){
         .attr("x", box.x + 15)
         .attr("y", smallBoxMargin.top + smallBoxDim.height - smallBoxDim.height*0.2+6)
         .text(box.text)
-      var bigTextMove = 110;
+      var bigTextMove = smallBoxDim.width/2 - 50;
       if(box.number.length > 5){
-        bigTextMove = 80;
+        bigTextMove = smallBoxDim.width/2 - 70;
       }
       gBox.append("text")
         .attr("class","boxBigText")
@@ -93,164 +101,174 @@ function boxes(){
 }
 var name = "total";
 function chart(){
-    var xScale = d3.scaleLinear() //xScale
-      .range([margin.left, (w-margin.right)-barW]);
-    var xAxisScale = d3.scaleLinear() //used for xAxis Line
-      .range([margin.left, w-margin.right]);
-    var yBarScale = d3.scaleLinear() //yBar scale
-      .range([h-margin.bottom, margin.top])
-    var yLineScale = d3.scaleLinear() //yLine scale
-      .range([h-margin.bottom, margin.top])
-    var yGrid = d3.axisLeft(yLineScale) //gridLines
-      .ticks(10)
-      .tickSize(leftRight-w)
-      .tickFormat("");
-    w = window.innerWidth - 400; 
-    var xAxis = d3.axisBottom(xAxisScale) //the x axis line
-      .tickFormat("")
-      .tickSize(0);
-    var yBarAxis = d3.axisLeft(yBarScale) //yBar axis
-      .ticks(10);
-    var yLineAxis = d3.axisRight(yLineScale)//yLine axis
-      .ticks(10);
-    ///////////////////////////////////////////////////////
-    ///EVERYTHING THAT NEEDS DATA
-    ///////////////////////////////////////////////////////
-    d3.csv("data/"+name+".csv").then(function(dataset) {
-      dataset.forEach((d)=>{
-        d.year = +d.year;
-        d.deaths = +d.deaths;
-        d.aidsdx = +d.aidsdx;
-        d.hivdx = +d.hivdx
-        d.plwdh = +d.plwdh
-      })
-      grid.attr("class","grid")//transforms the gridlines
-        .attr("transform","translate("+margin.left+",0)")
-        .call(yGrid);
-      xScale.domain([d3.min(dataset, (d)=>d.year), d3.max(dataset, (d) =>d.year)])//domain for x scale
-      xAxisScale.domain([d3.min(dataset, (d)=>d.year), d3.max(dataset, (d)=>d.year)]) //domain for x axis scale
-      yBarScale.domain([0, d3.max(dataset, (d)=>d.plwdh)])
-        .nice(5); //domain for the ybar scale
-      yLineScale.domain([0, d3.max(dataset, (d)=>{
+  getWindow();
+  var xScale = d3.scaleLinear() //xScale
+    .range([margin.left, (w-margin.right)-barW]);
+  var xAxisScale = d3.scaleLinear() //used for xAxis Line
+    .range([margin.left, w-margin.right]);
+  var yBarScale = d3.scaleLinear() //yBar scale
+    .range([h-margin.bottom, margin.top])
+  var yLineScale = d3.scaleLinear() //yLine scale
+    .range([h-margin.bottom, margin.top])
+  var yGrid = d3.axisLeft(yLineScale) //gridLines
+    .ticks(10)
+    .tickSize(leftRight-w)
+    .tickFormat("");
+  w = trueDim.width - 400; 
+  var xAxis = d3.axisBottom(xAxisScale) //the x axis line
+    .tickFormat("")
+    .tickSize(0);
+  var yBarAxis = d3.axisLeft(yBarScale) //yBar axis
+    .ticks(10);
+  var yLineAxis = d3.axisRight(yLineScale)//yLine axis
+    .ticks(10);
+  ///////////////////////////////////////////////////////
+  ///EVERYTHING THAT NEEDS DATA
+  ///////////////////////////////////////////////////////
+  d3.csv("data/"+name+".csv").then(function(dataset) {
+    dataset.forEach((d)=>{
+      d.year = +d.year;
+      d.deaths = +d.deaths;
+      d.aidsdx = +d.aidsdx;
+      d.hivdx = +d.hivdx;
+      d.plwdh = +d.plwdh;
+    })
+    grid.attr("class","grid")//transforms the gridlines
+      .attr("transform","translate("+margin.left+",0)")
+      .call(yGrid);
+    xScale.domain([d3.min(dataset, (d)=>d.year), d3.max(dataset, (d) =>d.year)])//domain for x scale
+    xAxisScale.domain([d3.min(dataset, (d)=>d.year), d3.max(dataset, (d)=>d.year)]) //domain for x axis scale
+    yBarScale.domain([0, d3.max(dataset, (d)=>d.plwdh)])
+      .nice(5); //domain for the ybar scale
+    yLineScale.domain([0, d3.max(dataset, (d)=>{
+      if(!isNaN(Math.max(d.aidsdx,d.deaths,d.hivdx))){
         return Math.max(d.aidsdx,d.deaths,d.hivdx);
-      })])
-        .nice(5); //domain for the y line scale
-      backBar.selectAll("rectBack") //back rect
-        .data(dataset)
-        .enter()
-        .append("rect")
-        .attr("class","rectBack")
-        .attr("x",(d)=>xScale((d.year)))
-        .attr("width",(w)/dataset.length)
-        .attr("y",margin.top)
-        .attr("height",h-topBottom)
-        .attr("opacity",0)
-        .attr("fill","lightgrey")
-        .on("mouseover",function(d){
-          d3.select(this)
-            .attr("opacity",0.3);
-          showTooltip(d);
-        })
-        .on("mouseout",function(){
-          d3.select(this)
-            .attr("opacity",0);
-          removeTooltip();
-        })
-      var plwdhRect = plwdhBar.selectAll("plwdhBar") //bar2
-        .data(dataset)
-        .enter()
-        .append("rect")
-        .attr("class","plwdhBar")
-        .attr("width", 30)
-        .attr("fill", bar2Color)
-        .attr("x",(d)=>xScale(d.year)+(barW/2)-15)
-        .attr("y", h-margin.bottom)
-      plwdhRect.transition()
-        .duration(500)
-        .attr("height", (d)=>(h-yBarScale(d.plwdh)) -margin.bottom)
-        .attr("y",(d)=>yBarScale(d.plwdh))
-      plwdhRect.on("mouseover",function(d){
+      }
+      else{
+        return Math.max(d.hivdx);
+      }
+    })])
+      .nice(5); //domain for the y line scale
+    backBar.selectAll("rectBack") //back rect
+      .data(dataset)
+      .enter()
+      .append("rect")
+      .attr("class","rectBack")
+      .attr("x",(d)=>xScale((d.year)))
+      .attr("width",barW)
+      .attr("y",margin.top)
+      .attr("height",h-topBottom)
+      .attr("opacity",0)
+      .attr("fill","lightgrey")
+      .on("mouseover",function(d){
+        d3.select(this)
+          .attr("opacity",0.3);
         showTooltip(d);
       })
       .on("mouseout",function(){
+        d3.select(this)
+          .attr("opacity",0);
         removeTooltip();
-      });
-      deaths.x((d)=>xScale(d.year)+(barW/2)) // deaths
-        .y((d)=>yLineScale(d.deaths));
-      svg.append("path")
-        .datum(dataset)
-        .attr("class","deathsLine")
-        .attr("d",deaths)
-      svg.selectAll("lineDot1") //dots for deaths
-        .data(dataset)
-        .enter()
-        .append("circle")
-        .attr("class","deathsDot")
-        .attr("cx",(d)=>xScale(d.year)+(barW/2))
-        .attr("cy", (d)=>yLineScale(d.deaths))
-        .attr("r",5)
-        .attr("fill",eteOrange)
-        .attr("stroke","white")
-        .attr("opacity",1);  
-      aidsdx.x((d)=>xScale(d.year)+(barW/2)) //aids diagnoses
-        .y((d)=>yLineScale(d.aidsdx));
-      svg.append("path")
-        .datum(dataset)
-        .attr("class","aidsdxLine")
-        .attr("d",aidsdx);
-      svg.selectAll("lineDot2") //dots for aidsdx
-        .data(dataset)
-        .enter()
-        .append("circle")
-        .attr("class","aidsdxDot")
-        .attr("cx",(d)=>xScale(d.year)+(barW/2))
-        .attr("cy", (d)=>yLineScale(d.aidsdx))
-        .attr("r",5)
-        .attr("opacity",1)
-        .attr("stroke","white")
-        .attr("fill",blueprintYellow);
-      hivdx.x((d)=>xScale(d.year)+(barW/2)) //hiv diagnoses
-        .y((d)=>yLineScale(d.hivdx));
-      svg.append("path")
-        .datum(dataset)
-        .attr("class","hivdxLine")
-        .attr("d",hivdx)
-      svg.selectAll("lineDot3") //dots for hivdx
-        .data(dataset)
-        .enter()
-        .append("circle")
-        .attr("class","hivdxDot")
-        .attr("cx",(d)=>xScale(d.year)+(barW/2))
-        .attr("cy", (d)=>yLineScale(d.hivdx))
-        .attr("r",5)
-        .attr("opacity",1)
-        .attr("stroke","white")
-        .attr("fill",justinGreen);
-      //////////////////////////////////
-      ///AXES
-      /////////////////////////////////
-      svg.append("g")
-        .attr("transform","translate(0,"+(h-margin.bottom)+")")
-        .call(xAxis)
-      svg.selectAll("year") //year labels on x axis
-        .data(dataset)
-        .enter()
-        .append("text")
-        .attr("class","year")
-        .attr("x", (d)=>(xScale(d.year))+barW/2-14)
-        .attr("y", h-margin.bottom + 20)
-        .text((d)=>d.year);
-      svg.append("g")
-        .attr("transform","translate("+margin.left+",0)")
-        .transition()
-        .attr("class","axis")
-        .call(yBarAxis);
-      svg.append("g")
-        .attr("transform","translate("+(w-margin.right)+",0)")
-        .transition()
-        .duration(500)
-        .attr("class","axis")
-        .call(yLineAxis);
+      })
+    var plwdhRect = plwdhBar.selectAll("plwdhBar") //bar2
+      .data(dataset)
+      .enter()
+      .append("rect")
+      .attr("class","plwdhBar")
+      .attr("width", barW/3)
+      .attr("fill", bar2Color)
+      .attr("x",(d)=>xScale(d.year)+(barW/3))
+      .attr("y", h-margin.bottom)
+    plwdhRect.transition()
+      .duration(500)
+      .attr("height", (d)=>(h-yBarScale(d.plwdh)) -margin.bottom)
+      .attr("y",(d)=>yBarScale(d.plwdh))
+    plwdhRect.on("mouseover",function(d){
+      showTooltip(d);
+    })
+    .on("mouseout",function(){
+      removeTooltip();
+    });
+    deaths.x((d)=>xScale(d.year)+(barW/2)) // deaths
+      .y((d)=>yLineScale(d.deaths));
+    svg.append("path")
+      .datum(dataset)
+      .attr("class","deathsLine")
+      .attr("d",deaths)
+    svg.selectAll("lineDot1") //dots for deaths
+      .data(dataset)
+      .enter()
+      .append("circle")
+      .attr("class","deathsDot")
+      .attr("r",5)
+      .attr("fill",eteOrange)
+      .attr("stroke","white")
+      .attr("opacity",1)
+      .attr("cx",(d)=>xScale(d.year)+(barW/2))
+      .attr("cy", (d)=>yLineScale(d.deaths))
+    aidsdx.x((d)=>xScale(d.year)+(barW/2)) //aids diagnoses
+      .y((d)=>yLineScale(d.aidsdx));
+    svg.append("path")
+      .datum(dataset)
+      .attr("class","aidsdxLine")
+      .attr("d",aidsdx);
+    svg.selectAll("lineDot2") //dots for aidsdx
+      .data(dataset)
+      .enter()
+      .append("circle")
+      .attr("class","aidsdxDot")
+      .attr("cx",(d)=>xScale(d.year)+(barW/2))
+      .attr("cy", (d)=>yLineScale(d.aidsdx))
+      .attr("r",5)
+      .attr("opacity",(d)=>{
+        isNaN(d.aidsdx) ? 0 : 1;
+      })
+      .attr("stroke","white")
+      .attr("fill",blueprintYellow);
+    hivdx.x((d)=>xScale(d.year)+(barW/2)) //hiv diagnoses
+      .y((d)=>yLineScale(d.hivdx));
+    svg.append("path")
+      .datum(dataset)
+      .attr("class","hivdxLine")
+      .attr("d",hivdx)
+    svg.selectAll("lineDot3") //dots for hivdx
+      .data(dataset)
+      .enter()
+      .append("circle")
+      .attr("class","hivdxDot")
+      .attr("cx",(d)=>xScale(d.year)+(barW/2))
+      .attr("cy", (d)=>yLineScale(d.hivdx))
+      .attr("r",5)
+      .attr("opacity",(d)=>{
+        isNaN(d.aidsdx) ? 0 : 1;
+      })
+      .attr("stroke","white")
+      .attr("fill",justinGreen);
+    //////////////////////////////////
+    ///AXES
+    /////////////////////////////////
+    svg.append("g")
+      .attr("transform","translate(0,"+(h-margin.bottom)+")")
+      .call(xAxis)
+    svg.selectAll("year") //year labels on x axis
+      .data(dataset)
+      .enter()
+      .append("text")
+      .attr("class","year")
+      .attr("x", (d)=>(xScale(d.year))+barW/2-14)
+      .attr("y", h-margin.bottom + 20)
+      .text((d)=>d.year);
+    svg.append("g")
+      .attr("transform","translate("+margin.left+",0)")
+      .transition()
+      .attr("class","axis")
+      .call(yBarAxis);
+    svg.append("g")
+      .attr("transform","translate("+(xScale(2017)+barW)+",0)")
+      .transition()
+      .duration(500)
+      .attr("class","axis")
+      .call(yLineAxis);
     })    
   function showTooltip(d){ //also adds dots for the lines
     var left = xScale(d.year) + svgPos.offsetLeft - margin.left - 20;
@@ -260,7 +278,7 @@ function chart(){
       .attr("class","tooltip")
       .attr("opacity",1)
       .html("<h5><b>"+d.year+"</b></h5>"+"</br><h5>PLWDH: "+d.plwdh+"</h5> </br> <h5>HIV Diagnoses: "+d.hivdx+"</h5> </br> <h5>Deaths: "+d.deaths+"</h5> </br> <h5>AIDS Diagnoses: "+d.aidsdx+"</h5>")
-      .style("top", yLineScale(Math.max(d.aidsdx,d.deaths,d.hivdx))+300)
+      .style("top", yLineScale(Math.max(d.hivdx))+200)
       .style("left", left)
   }
   function removeTooltip(){
