@@ -50,6 +50,7 @@ svg {
     font-size: 12px;
     position: absolute;
     padding: 10px;
+    margin: 0;
 }
 .logo{
     max-width: 25%;

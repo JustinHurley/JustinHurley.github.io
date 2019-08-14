@@ -1,59 +1,58 @@
-<!DOCTYPE html>
 <html>
-<head>
-    <title>Graph with 4 Dimensions</title>
-    <meta charset="UTF-8">
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body onload="chart(); boxes()">
-    <img src="data/etelogo.png" alt="ETE Logo" class="logo">
-    <!-- <h1>Title for the Graph</h1>
-    <h3>Additional Information</h3> -->
-    <div id="boxDiv" class="box">
-        
-    </div>
-    <div id="svgDiv" class="box">
-        <script src="chartFxn.js"></script>
-        <div class="sidebar">
-            <h3>Stratify the Result By:</h3>
-            <h6>Sex</h6>
-            <select name="sex" id="sex" onchange="change(this.value, this.id)" class="sidebarSpace">
-                <option value="total">All</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
-            <h6>Age Group</h6>
-            <select name="ageGroup" id="ageGroup" onchange="change(this.value, this.id)" class="sidebarSpace">
-                <option value="total">All</option>
-                <option value="lt13">&lt 13 Years</option>
-                <option value="13-19">13-19 Years</option>
-                <option value="20-29">20-29 Years</option>
-                <option value="30-39">30-39 Years</option>
-                <option value="40-49">40-49 Years</option>
-                <option value="50-59">50-59 Years</option>
-                <option value="60+">60+ Years</option>
-            </select>
-            <h6>Race</h6>
-            <select name="race" id="race" onchange="change(this.value, this.id)" class="sidebarSpace">
-                <option value="total">All</option>
-                <option value="asian">Asian/Pacific Islander</option>
-                <option value="black">Black</option>
-                <option value="hispanic">Hispanic</option>
-                <option value="multiRace">Multi-Race</option>
-                <option value="nativeAmerican">Native American</option>
-                <option value="white">White</option>
-            </select>
-            <h6>Risk Factor</h6>
-            <select name="risk" id="risk" onchange="change(this.value, this.id)" class="sidebarSpace">
-                <option value="total">All</option>
-                <option value="heterosexual">Heterosexual</option>
-                <option value="idu">IDU</option>
-                <option value="msm">MSM</option>
-                <option value="msmidu">MSM/IDU</option>
-                <option value="pediatric">Pediatric</option>
-            </select>
+    <head>
+        <title>Graph with 4 Dimensions</title>
+        <meta charset="UTF-8">
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body onload="chart(); boxes()">
+        <img src="data/etelogo.png" alt="ETE Logo" class="logo">
+        <!-- <h1>Title for the Graph</h1>
+        <h3>Additional Information</h3> -->
+        <div id="boxDiv" class="box">
+            
         </div>
-    </div>
-</body>
+        <div id="svgDiv" class="box">
+            <script src="chartFxn.js"></script>
+            <div class="sidebar">
+                <h3>Stratify the Result By:</h3>
+                <h6>Sex</h6>
+                <select name="sex" id="sex" onchange="change(this.value, this.id)" class="sidebarSpace">
+                    <option value="total">All</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <h6>Age Group</h6>
+                <select name="ageGroup" id="ageGroup" onchange="change(this.value, this.id)" class="sidebarSpace">
+                    <option value="total">All</option>
+                    <option value="lt13">&lt 13 Years</option>
+                    <option value="13-19">13-19 Years</option>
+                    <option value="20-29">20-29 Years</option>
+                    <option value="30-39">30-39 Years</option>
+                    <option value="40-49">40-49 Years</option>
+                    <option value="50-59">50-59 Years</option>
+                    <option value="60+">60+ Years</option>
+                </select>
+                <h6>Race</h6>
+                <select name="race" id="race" onchange="change(this.value, this.id)" class="sidebarSpace">
+                    <option value="total">All</option>
+                    <option value="asian">Asian/Pacific Islander</option>
+                    <option value="black">Black</option>
+                    <option value="hispanic">Hispanic</option>
+                    <option value="multiRace">Multi-Race</option>
+                    <option value="nativeAmerican">Native American</option>
+                    <option value="white">White</option>
+                </select>
+                <h6>Risk Factor</h6>
+                <select name="risk" id="risk" onchange="change(this.value, this.id)" class="sidebarSpace">
+                    <option value="total">All</option>
+                    <option value="heterosexual">Heterosexual</option>
+                    <option value="idu">IDU</option>
+                    <option value="msm">MSM</option>
+                    <option value="msmidu">MSM/IDU</option>
+                    <option value="pediatric">Pediatric</option>
+                </select>
+            </div>
+        </div>
+    </body>
 </html>

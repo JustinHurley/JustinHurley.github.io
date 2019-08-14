@@ -200,7 +200,7 @@ function chart(){
       .enter()
       .append("circle")
       .attr("class","deathsDot")
-      .attr("r",5)
+      .attr("r","5px")
       .attr("fill",eteOrange)
       .attr("stroke","white")
       .attr("opacity",1)
