@@ -88,3 +88,7 @@ div.sidebar h3,h6{
     font-weight: bold;
     text-align: center;
 }
+h5{
+    margin: 0px;
+    padding: 0px;
+}
