@@ -20,12 +20,12 @@ var svg = d3.select("#svgDiv")
   .attr("height",h)
   .attr("margin","auto")
   .attr("id","chartsvg");
-var backBar, bar1, bar2, line1, line2;
+var backBar;
 var eteOrange = "rgb(235,119,38)";
 var eteBlue = "rgb(31,139,199)";
 var googleRed = "#DB4437";
 var googleBlue = "#4285F4";
-var googleGreen = "rgb(19, 141, 82)";
+var googleGreen = "rgb(45, 187, 118)";
 var googleYellow = "#F4B400";
 var grid = svg.append("g") //adds the gridlines
 var backBar = svg.append("g") //the back rectangles
@@ -196,7 +196,7 @@ function chart(){
           .attr("opacity",0);
         removeTooltip();
       })
-    var plwdhRect = plwdhBar.selectAll("plwdhBar") //bar2
+    var plwdhRect = plwdhBar.selectAll("plwdhBar") //bars for plwdh
       .data(dataset)
       .enter()
       .append("rect")
@@ -373,7 +373,7 @@ svg.append("circle") //plwdh circle
         .transition(tTime)
         .attr("opacity",1);
     });
-svg.append("text") //bar1 text
+svg.append("text") //plwdh text
     .text("People Living With Diagnosed HIV")
     .attr("transform","translate("+(mid.x-280)+","+(yLegend+4)+")")
     .on("mouseover",function(){

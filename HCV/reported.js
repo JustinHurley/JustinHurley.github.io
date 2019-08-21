@@ -1,7 +1,7 @@
 //many thanks to D3 Tips and Tricks v4.x by Malcolm Maclean for all the help with making graphs and such
-var margin = {top: 10, right: 70, bottom: 100, left: 70},
+var margin = {top: 30, right: 70, bottom: 100, left: 70},
   w = 900;
-  h = 400;
+  h = 500;
 var topBottom = margin.top + margin.bottom;
 var leftRight = margin.left + margin.right;  
 var mid = {x: w/2, y:h/2};
@@ -108,7 +108,7 @@ function all(data) {
       .attr("class","bar")
       .on("mouseover",(d)=>{
           var group = svg.append("g")
-            .attr("class","tooltip");
+            .attr("class","tooltip")
           var toolReport = {
             y: 30,
             text: "Reported: "+d.reported
@@ -121,10 +121,26 @@ function all(data) {
             y: 0,
             text: ()=>(isNaN(d.ageAdj) ? "Age Adjusted Rate: N/A" : "Age Adjusted Rate: "+d.ageAdj)
           }
-          var toolTipText = [toolReport, toolCrude, toolAge]
+          var toolYear = {
+            y: 45,
+            text: d.year
+          }
+          var toolTipText = [toolYear, toolReport, toolCrude, toolAge]
+          var xTip = 60;
+          if(xScale(d.year)+xTip > w-160){
+            xTip = -100;
+          }
+          group.append("rect")
+            .attr("x",xScale(d.year)+xTip-10)
+            .attr("y",yScale(d.reported)-60)
+            .attr("width","135px")
+            .attr("height","70px")
+            .attr("fill","lightgrey")
+            .attr("opacity","0.7")
           toolTipText.forEach((tool)=>{
             group.append("text")
-            .attr("x",xScale(d.year)+7)
+            .attr("class","tooltip")
+            .attr("x",xScale(d.year)+xTip)
             .attr("y",yScale(d.reported) - tool.y)
             .text(tool.text);
           })
@@ -135,10 +151,10 @@ function all(data) {
             .exit();
       })
     svg.selectAll(".year")  //adds text for each year (basically the x axis)
-      .attr("class","year")
       .data(dataset)
       .enter()
       .append("text")
+      .attr("class","year")
       .attr("x", (d)=>(xScale(d.year))+barW/4)
       .attr("y", h-margin.bottom+15)
       .text((d)=>d.year)
