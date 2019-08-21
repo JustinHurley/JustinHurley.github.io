@@ -34,13 +34,11 @@ text {
     opacity: 0.7;
 }
 svg {
-    display: block;
     margin: auto;
     float: left;
 }
 
 .tooltip{
-    display: block;
     text-align: left;
     width: 120px;
     height: 50px;
