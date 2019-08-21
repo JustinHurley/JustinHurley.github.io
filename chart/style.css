@@ -16,17 +16,17 @@ text {
 }
 .deathsLine{
     fill:none;
-    stroke: #ff7235;
+    stroke: #DB4437;
     stroke-width: 3px;
 }
 .aidsdxLine{
     fill:none;
-    stroke: #7235ff;
+    stroke: #F4B400;
     stroke-width: 3px;
 }
 .hivdxLine {
     fill:none;
-    stroke: #2cde5f; 
+    stroke: rgb(19, 141, 82); 
     stroke-width: 3px;
 }
 .grid line{

@@ -23,10 +23,10 @@ var svg = d3.select("#svgDiv")
 var backBar, bar1, bar2, line1, line2;
 var eteOrange = "rgb(235,119,38)";
 var eteBlue = "rgb(31,139,199)";
-var sphBlue = "rgb(1,175,220)";
-var justinGreen = "#2cde5f";
-var justinRed = "#ff7235";
-var justinPurple = "#7235ff";
+var googleRed = "#DB4437";
+var googleBlue = "#4285F4";
+var googleGreen = "rgb(19, 141, 82)";
+var googleYellow = "#F4B400";
 var grid = svg.append("g") //adds the gridlines
 var backBar = svg.append("g") //the back rectangles
 var deaths = d3.line() //deaths line
@@ -227,7 +227,7 @@ function chart(){
       .append("circle")
       .attr("class","deathsDot")
       .attr("r","5px")
-      .attr("fill",justinRed)
+      .attr("fill",googleRed)
       .attr("stroke","white")
       .attr("opacity",1)
       .attr("cx",(d)=>xScale(d.year)+(barW/2))
@@ -250,7 +250,7 @@ function chart(){
         isNaN(d.aidsdx) ? 0 : 1;
       })
       .attr("stroke","white")
-      .attr("fill",justinPurple);
+      .attr("fill",googleYellow);
     hivdx.x((d)=>xScale(d.year)+(barW/2)) //hiv diagnoses
       .y((d)=>yLineScale(d.hivdx));
     svg.append("path")
@@ -269,7 +269,7 @@ function chart(){
         isNaN(d.aidsdx) ? 0 : 1;
       })
       .attr("stroke","white")
-      .attr("fill",justinGreen);
+      .attr("fill",googleGreen);
     //////////////////////////////////
     ///AXES
     /////////////////////////////////
@@ -418,7 +418,7 @@ function makeLegendLine(e){
     });
 }
 var hivdxLegend = {
-  color: justinGreen, 
+  color: googleGreen, 
   translate: "translate("+(mid.x-70)+","+(yLegend-4)+")", 
   notClass: ".aidsdxLine,.plwdhBar,.deathsLine,.deathsDot,.aidsdxDot",
   time: tTime,
@@ -426,7 +426,7 @@ var hivdxLegend = {
   translateText: "translate("+(mid.x-45)+","+(yLegend+4)+")"
 }
 var deathsLegend = {
-  color: justinRed, 
+  color: googleRed, 
   translate: "translate("+(mid.x+55)+","+(yLegend-4)+")", 
   notClass: ".hivdxLine,.plwdhBar,.aidsdxLine,.aidsdxDot,.hivdxDot", 
   time: tTime, 
@@ -434,7 +434,7 @@ var deathsLegend = {
   translateText:"translate("+(mid.x+80)+","+(yLegend+4)+")"
 }  
 var aidsdxLegend = {
-  color: justinPurple, 
+  color: googleYellow, 
   translate: "translate("+(mid.x+135)+","+(yLegend-4)+")", 
   notClass: ".hivdxLine,.deathsLine,.plwdhBar,.deathsDot,.hivdxDot", 
   time: tTime, 
