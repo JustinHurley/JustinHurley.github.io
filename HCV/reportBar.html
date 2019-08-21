@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>NYC Total Reported: Chronic HCV</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    </head>  
+    <body onload="all(data)">
+        <div class="border header">
+            <h1>End the (Chronic HCV) Epidemic</h1>
+            <h5>A mockup for an HCV Dashboard</h5>
+            <h5>Data Source: NYC EpiQuery Communicable Disease Surveillance Data</h5>
+        </div>
+        <!-- Zone 1 (contains the graph, title, and stratification bar) -->
+        <div id="zone1">
+            <!--Selection Bar for Stratification-->
+            <h2 class="border title">Reported Chronic Hepatitis C Cases</h2>
+            <div class="sidebar border">
+                <h3 class="sidebarSpace">Crude or Age Adjusted Rate</h3>
+                <select name="rate" id="rate" class="sidebarSpace" onchange="addLine(this.value)">
+                    <option value="none">None</option>
+                    <option value="crude">Crude Rate</option>
+                    <option value="ageAdj" id="ageAdjRate">Age Adjusted Rate</option>
+                </select>
+                <h3 class="sideBarSpace">Stratify the Result By:</h3>
+                <h6>Sex</h6>
+                <select name="sex" id="sex" onchange="change(this.value, this.id)" class="sidebarSpace">
+                    <option value="data">All</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <h6>Age Group</h6>
+                <select name="ageGroup" id="ageGroup" onchange="change(this.value, this.id)" class="sidebarSpace">
+                    <option value="data">All</option>
+                    <option value="0-19">0-19 Years</option>
+                    <option value="20-29">20-29 Years</option>
+                    <option value="30-39">30-39 Years</option>
+                    <option value="40-49">40-49 Years</option>
+                    <option value="50-59">50-59 Years</option>
+                    <option value="60-69">60-69 Years</option>
+                    <option value="70-79">70-79 Years</option>
+                    <option value="80+">80+ Years</option>
+                </select>
+                <h6>Borough</h6>
+                <select name="borough" id="borough" onchange="change(this.value, this.id)" class="sidebarSpace">
+                    <option value="data">All</option>
+                    <option value="bronx">Bronx</option>
+                    <option value="brooklyn">Brooklyn</option>
+                    <option value="manhattan">Manhattan</option>
+                    <option value="queens">Queens</option>
+                    <option value="statenIsland">Staten Island</option>
+                </select>
+            </div>
+        </div>
+        <div class="margin" id="reportedSVG">
+            <script src="reported.js"></script>
+        </div>
+    </body>
+</html>
