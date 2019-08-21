@@ -46,7 +46,6 @@ svg {
     background-color: rgba(211, 211, 211, 0.9);
     font-family: sans-serif;
     font-size: 12px;
-    position: absolute;
     padding: 10px;
     margin: 0px;
 }
@@ -85,4 +84,8 @@ div.sidebar h3,h6{
     font-size: 40px;
     font-weight: bold;
     text-align: center;
+}
+h5{
+    padding: 1px;
+    color: green;
 }
