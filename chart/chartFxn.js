@@ -37,67 +37,67 @@ var tTime = 800; //transition time
 var plwdhBar = svg.append("g") //the people living with hiv bar
 var svgPos = document.getElementById("svgDiv");
 function boxes(){
-    var smallBoxMargin = {top: 20, bottom: 20, left: 20, right: 20};
-    var boxH = 150;
-    var smallBoxDim = {width: (trueDim.width/4) -smallBoxMargin.left-smallBoxMargin.right, height: boxH-smallBoxMargin.top-smallBoxMargin.bottom}
-    var boxSvg = d3.select("#boxDiv")
-      .append("svg")
-      .attr("height",boxH)
-      .attr("width",trueDim.width);
-    var boxMidpoint = trueDim.width/2;
-    var box1 = {
-      number: "108,600",
-      text: "People living with diagnosed HIV (PLWDHI)",
-      x: boxMidpoint-2*smallBoxDim.width - 2*smallBoxMargin.right-smallBoxMargin.left
+  var smallBoxMargin = {top: 20, bottom: 20, left: 20, right: 20};
+  var boxH = 150;
+  var smallBoxDim = {width: (trueDim.width/4) -smallBoxMargin.left-smallBoxMargin.right, height: boxH-smallBoxMargin.top-smallBoxMargin.bottom}
+  var boxSvg = d3.select("#boxDiv")
+    .append("svg")
+    .attr("height",boxH)
+    .attr("width",trueDim.width);
+  var boxMidpoint = trueDim.width/2;
+  var box1 = {
+    number: "108,600",
+    text: "People living with diagnosed HIV (PLWDHI)",
+    x: boxMidpoint-2*smallBoxDim.width - 2*smallBoxMargin.right-smallBoxMargin.left
+  }
+  var box2 = {
+    number: "3,120",
+    text: "People newly diagnosed with HIV",
+    x: boxMidpoint - smallBoxDim.width - smallBoxMargin.right
+  }
+  var box3 = {
+    number: "1,475",
+    text: "People newly diagnosed with AIDS",
+    x: boxMidpoint+smallBoxMargin.left
+  }
+  var box4 = {
+    number: "1,974",
+    text: "Total Deaths among people living with HIV/AIDS",
+    x: boxMidpoint+smallBoxDim.width+2*smallBoxMargin.left+smallBoxMargin.right
+  }
+  var boxes = [box1, box2, box3, box4]
+  boxes.forEach((box)=>{
+    var gBox = boxSvg.append("g")
+      .attr("class","gBox")
+    gBox.append("rect")
+      .attr("class","smallBox")
+      .attr("width",smallBoxDim.width)
+      .attr("height",smallBoxDim.height)
+      .attr("fill",eteOrange)
+      .attr("x", box.x)
+      .attr("y", smallBoxMargin.top)
+    gBox.append("rect")
+      .attr("width",smallBoxDim.width - 20)
+      .attr("height",smallBoxDim.height*0.2)
+      .attr("fill","white")
+      .attr("x", box.x+10)
+      .attr("y", smallBoxMargin.top + smallBoxDim.height - smallBoxDim.height*0.2 -10)
+    gBox.append("text")
+      .attr("class","boxText")
+      .attr("x", box.x + 15)
+      .attr("y", smallBoxMargin.top + smallBoxDim.height - smallBoxDim.height*0.2+6)
+      .attr("font-size", w*0.01)
+      .text(box.text)
+    var bigTextMove = smallBoxDim.width/2 - 50;
+    if(box.number.length > 5){
+      bigTextMove = smallBoxDim.width/2 - 70;
     }
-    var box2 = {
-      number: "3,120",
-      text: "People newly diagnosed with HIV",
-      x: boxMidpoint - smallBoxDim.width - smallBoxMargin.right
-    }
-    var box3 = {
-      number: "1,475",
-      text: "People newly diagnosed with AIDS",
-      x: boxMidpoint+smallBoxMargin.left
-    }
-    var box4 = {
-      number: "1,974",
-      text: "Total Deaths among people living with HIV/AIDS",
-      x: boxMidpoint+smallBoxDim.width+2*smallBoxMargin.left+smallBoxMargin.right
-    }
-    var boxes = [box1, box2, box3, box4]
-    boxes.forEach((box)=>{
-      var gBox = boxSvg.append("g")
-        .attr("class","gBox")
-      gBox.append("rect")
-        .attr("class","smallBox")
-        .attr("width",smallBoxDim.width)
-        .attr("height",smallBoxDim.height)
-        .attr("fill",eteOrange)
-        .attr("x", box.x)
-        .attr("y", smallBoxMargin.top)
-      gBox.append("rect")
-        .attr("width",smallBoxDim.width - 20)
-        .attr("height",smallBoxDim.height*0.2)
-        .attr("fill","white")
-        .attr("x", box.x+10)
-        .attr("y", smallBoxMargin.top + smallBoxDim.height - smallBoxDim.height*0.2 -10)
-      gBox.append("text")
-        .attr("class","boxText")
-        .attr("x", box.x + 15)
-        .attr("y", smallBoxMargin.top + smallBoxDim.height - smallBoxDim.height*0.2+6)
-        .attr("font-size", w*0.01)
-        .text(box.text)
-      var bigTextMove = smallBoxDim.width/2 - 50;
-      if(box.number.length > 5){
-        bigTextMove = smallBoxDim.width/2 - 70;
-      }
-      gBox.append("text")
-        .attr("class","boxBigText")
-        .attr("x", box.x + bigTextMove)
-        .attr("y", smallBoxMargin.top + smallBoxDim.height - smallBoxDim.height*0.5)
-        .text(box.number)
-    })
+    gBox.append("text")
+      .attr("class","boxBigText")
+      .attr("x", box.x + bigTextMove)
+      .attr("y", smallBoxMargin.top + smallBoxDim.height - smallBoxDim.height*0.5)
+      .text(box.number)
+  })
 }
 var name = "total";
 function chart(){
@@ -349,7 +349,7 @@ function change(value, id){
   else{
     groups.forEach(element => {
       if(element != id){
-        document.getElementById(element).disabled = true;
+        document.getElementById(element).value = "total";
       }
     });
   }
