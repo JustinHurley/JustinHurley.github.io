@@ -32,14 +32,14 @@ var data = "data", globalRate = "none";
 svg.append("text") //adds the y-axis labels
   .attr("transform","translate("+(w/2)+","+(h-60)+")")
   .style('text-anchor', 'middle')
-  .text("Date");
+  .text("Year");
 svg.append("text") //adds the y-axis labels
   .attr("transform", "rotate(-90)")
   .style("text-anchor", "middle")
   .attr("y", 0)
-  .attr("x",-h/2)
+  .attr("x",-h/2+20)
   .attr("dy", "1em")
-  .text("Reported Cases");
+  .text("Reported HCV Cases");
 function all(data) {
   barW = (w-leftRight)/15;
   svg.selectAll(".bar") //deletes old rectangles
