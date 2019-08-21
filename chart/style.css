@@ -16,12 +16,12 @@ text {
 }
 .deathsLine{
     fill:none;
-    stroke: rgb(235,119,38);
+    stroke: rgb(252, 68, 68);
     stroke-width: 3px;
 }
 .aidsdxLine{
     fill:none;
-    stroke: rgb(252,181,26);
+    stroke: rgb(242, 189, 12);
     stroke-width: 3px;
 }
 .hivdxLine {

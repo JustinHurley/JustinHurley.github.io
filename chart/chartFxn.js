@@ -24,9 +24,10 @@ var backBar, bar1, bar2, line1, line2;
 var eteOrange = "rgb(235,119,38)";
 var eteBlue = "rgb(31,139,199)";
 var sphBlue = "rgb(1,175,220)";
-var blueprintYellow = "rgb(252,181,26)";
+var blueprintYellow = "rgb(242, 189, 12)";
 var justinGreen = "rgb(2, 207, 12)";
-var bar1Color = eteOrange, bar2Color = eteBlue, line1Color = sphBlue, line2Color = blueprintYellow;
+var justinRed = "rgb(252, 68, 68)";
+var bar2Color = eteBlue, line1Color = sphBlue, line2Color = blueprintYellow;
 var grid = svg.append("g") //adds the gridlines
 var backBar = svg.append("g") //the back rectangles
 var deaths = d3.line() //deaths line
@@ -201,7 +202,7 @@ function chart(){
       .append("circle")
       .attr("class","deathsDot")
       .attr("r","5px")
-      .attr("fill",eteOrange)
+      .attr("fill",justinRed)
       .attr("stroke","white")
       .attr("opacity",1)
       .attr("cx",(d)=>xScale(d.year)+(barW/2))
@@ -400,7 +401,7 @@ var hivdxLegend = {
   translateText: "translate("+(mid.x-45)+","+(yLegend+4)+")"
 }
 var deathsLegend = {
-  color: eteOrange, 
+  color: justinRed, 
   translate: "translate("+(mid.x+55)+","+(yLegend-4)+")", 
   notClass: ".hivdxLine,.plwdhBar,.aidsdxLine,.aidsdxDot,.hivdxDot", 
   time: tTime, 
