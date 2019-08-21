@@ -24,10 +24,9 @@ var backBar, bar1, bar2, line1, line2;
 var eteOrange = "rgb(235,119,38)";
 var eteBlue = "rgb(31,139,199)";
 var sphBlue = "rgb(1,175,220)";
-var blueprintYellow = "rgb(240, 210, 111)";
-var justinGreen = "#33a02c";
-var justinRed = "rgb(252, 68, 68)";
-var bar2Color = eteBlue, line1Color = sphBlue, line2Color = blueprintYellow;
+var justinGreen = "#2cde5f";
+var justinRed = "#ff7235";
+var justinPurple = "#7235ff";
 var grid = svg.append("g") //adds the gridlines
 var backBar = svg.append("g") //the back rectangles
 var deaths = d3.line() //deaths line
@@ -203,7 +202,7 @@ function chart(){
       .append("rect")
       .attr("class","plwdhBar")
       .attr("width", barW/3)
-      .attr("fill", bar2Color)
+      .attr("fill", eteBlue)
       .attr("x",(d)=>xScale(d.year)+(barW/3))
       .attr("y", h-margin.bottom)
     plwdhRect.transition()
@@ -251,7 +250,7 @@ function chart(){
         isNaN(d.aidsdx) ? 0 : 1;
       })
       .attr("stroke","white")
-      .attr("fill",blueprintYellow);
+      .attr("fill",justinPurple);
     hivdx.x((d)=>xScale(d.year)+(barW/2)) //hiv diagnoses
       .y((d)=>yLineScale(d.hivdx));
     svg.append("path")
@@ -435,7 +434,7 @@ var deathsLegend = {
   translateText:"translate("+(mid.x+80)+","+(yLegend+4)+")"
 }  
 var aidsdxLegend = {
-  color: blueprintYellow, 
+  color: justinPurple, 
   translate: "translate("+(mid.x+135)+","+(yLegend-4)+")", 
   notClass: ".hivdxLine,.deathsLine,.plwdhBar,.deathsDot,.hivdxDot", 
   time: tTime, 

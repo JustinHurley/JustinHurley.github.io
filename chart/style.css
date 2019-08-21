@@ -16,17 +16,17 @@ text {
 }
 .deathsLine{
     fill:none;
-    stroke: rgb(252, 68, 68);
+    stroke: #ff7235;
     stroke-width: 3px;
 }
 .aidsdxLine{
     fill:none;
-    stroke: rgb(240, 210, 111);
+    stroke: #7235ff;
     stroke-width: 3px;
 }
 .hivdxLine {
     fill:none;
-    stroke: #33a02c; 
+    stroke: #2cde5f; 
     stroke-width: 3px;
 }
 .grid line{
@@ -71,6 +71,9 @@ div.sidebar h3,h6{
     font-size: 40px;
     font-weight: bold;
     text-align: center;
+}
+.boxText{
+    font-size: 10px;
 }
 .chartTitle{
     font-size: 20px;
