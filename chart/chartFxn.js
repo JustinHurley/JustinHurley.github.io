@@ -1,4 +1,4 @@
-var margin = {top: 20, right: 100, bottom: 100, left: 70},
+var margin = {top: 50, right: 100, bottom: 100, left: 70},
     w = window.innerWidth - 400, 
     h = 500;
 var trueDim = {width: 0, height: 0};
@@ -24,8 +24,8 @@ var backBar, bar1, bar2, line1, line2;
 var eteOrange = "rgb(235,119,38)";
 var eteBlue = "rgb(31,139,199)";
 var sphBlue = "rgb(1,175,220)";
-var blueprintYellow = "rgb(242, 189, 12)";
-var justinGreen = "rgb(2, 207, 12)";
+var blueprintYellow = "rgb(240, 210, 111)";
+var justinGreen = "#33a02c";
 var justinRed = "rgb(252, 68, 68)";
 var bar2Color = eteBlue, line1Color = sphBlue, line2Color = blueprintYellow;
 var grid = svg.append("g") //adds the gridlines
@@ -87,6 +87,7 @@ function boxes(){
         .attr("class","boxText")
         .attr("x", box.x + 15)
         .attr("y", smallBoxMargin.top + smallBoxDim.height - smallBoxDim.height*0.2+6)
+        .attr("font-size", w*0.01)
         .text(box.text)
       var bigTextMove = smallBoxDim.width/2 - 50;
       if(box.number.length > 5){
@@ -97,7 +98,6 @@ function boxes(){
         .attr("x", box.x + bigTextMove)
         .attr("y", smallBoxMargin.top + smallBoxDim.height - smallBoxDim.height*0.5)
         .text(box.number)
-
     })
 }
 var name = "total";
@@ -123,6 +123,32 @@ function chart(){
     .ticks(10);
   var yLineAxis = d3.axisRight(yLineScale)//yLine axis
     .ticks(10);
+  svg.selectAll('.chartTitle')
+    .remove()
+    .exit();
+  var titleDict = {
+    "total": "the Total Population",
+    "male": "Men",
+    "female": "Women",
+    "13-19": "13 to 19 Year Olds",
+    "20-29": "20 to 29 Year Olds",
+    "30-39": "30 to 39 Year Olds",
+    "40-49": "40 to 49 Year Olds",
+    "50-59": "50 to 59 Year Olds",
+    "60+": "60 Year Olds or Older",
+    "asian": "the Asians and Pacific Islander Population",
+    "black": "the Black Population",
+    "hispanic": "the Hispanic Population",
+    "multiRace": "the Multi-Race Population",
+    "nativeAmerican": "the Native American Population",
+    "white": "the White Population"
+  }
+  var titleLen = ('HIV Epidemic Changes Among '+titleDict[name]+" for New York State").length;
+  svg.append("text")
+    .attr('y',40)
+    .attr('x',mid.x-200-((titleLen/2)*5))
+    .attr('class','chartTitle')
+    .text('HIV Epidemic Changes Among '+titleDict[name]+ " for New York State")
   ///////////////////////////////////////////////////////
   ///EVERYTHING THAT NEEDS DATA
   ///////////////////////////////////////////////////////

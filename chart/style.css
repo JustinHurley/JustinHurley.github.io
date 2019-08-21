@@ -21,12 +21,12 @@ text {
 }
 .aidsdxLine{
     fill:none;
-    stroke: rgb(242, 189, 12);
+    stroke: rgb(240, 210, 111);
     stroke-width: 3px;
 }
 .hivdxLine {
     fill:none;
-    stroke: rgb(2, 207, 12); 
+    stroke: #33a02c; 
     stroke-width: 3px;
 }
 .grid line{
@@ -66,15 +66,12 @@ div.sidebar h3,h6{
     margin-bottom: 10px;
     margin-top: 10px;
 }
-.boxText {
-    font-family: sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    color: black;
-}
 .boxBigText{ 
     fill: white;
     font-size: 40px;
     font-weight: bold;
     text-align: center;
+}
+.chartTitle{
+    font-size: 20px;
 }
