@@ -270,16 +270,35 @@ function chart(){
       .attr("class","axis")
       .call(yLineAxis);
     })    
-  function showTooltip(d){ //also adds dots for the lines
-    var left = xScale(d.year) + svgPos.offsetLeft - margin.left - 20;
-    left < margin.left*2 ? left += 20 + barW + 2*margin.left : left = left; 
-    d3.select("body")
-      .append("div")
-      .attr("class","tooltip")
-      .attr("opacity",1)
-      .html("<h5><b>"+d.year+"</b></h5>"+"</br><h5>PLWDH: "+d.plwdh+"</h5> </br> <h5>HIV Diagnoses: "+d.hivdx+"</h5> </br> <h5>Deaths: "+d.deaths+"</h5> </br> <h5>AIDS Diagnoses: "+d.aidsdx+"</h5>")
-      .style("top", yLineScale(Math.max(d.hivdx))+200)
-      .style("left", left)
+  function showTooltip(d){ 
+    var xTip = xScale(d.year) + 100;
+    if(xTip > w-margin.right*2){
+      xTip = xScale(d.year) -100;
+    }
+    var yTip = yBarScale(d.plwdh) + 50;
+    var groupTip = svg.append("g")
+      .attr('class','tooltip');
+    groupTip.append("rect")
+      .attr('width', "125px")
+      .attr("height",'82px')
+      .attr("x",xTip-10)
+      .attr("y",yTip-15)
+      .attr('fill','lightgrey')
+      .attr('opacity','0.7')
+    var yearTip = d.year;
+    var plwdhTip = "PLWDH: " + d.plwdh;
+    var hivdxTip = "HIV Diagnoses: " + d.hivdx;
+    var aidsdxTip = "AIDS Diagnoses: " + d.aidsdx;
+    var deathsTip = "Deaths: " + d.deaths;
+    var tips = [yearTip, plwdhTip, hivdxTip, aidsdxTip, deathsTip];
+    var yTipOffset = 0;
+    tips.forEach((tip)=>{
+      groupTip.append("text")
+        .attr("x",xTip)
+        .attr("y",yTip - yTipOffset)
+        .text(tip);
+        yTipOffset -= 15;
+    })
   }
   function removeTooltip(){
     d3.selectAll(".tooltip")
