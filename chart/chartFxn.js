@@ -140,7 +140,12 @@ function chart(){
     "hispanic": "the Hispanic Population",
     "multiRace": "the Multi-Race Population",
     "nativeAmerican": "the Native American Population",
-    "white": "the White Population"
+    "white": "the White Population",
+    "idu": "Injection Drug Users",
+    "heterosexual": "Heterosexuals",
+    "msm": "Men who Have Sex with Men",
+    "msmidu": "MSM and Injection Drug Users",
+    "pediatric": "Pediatric"
   }
   var titleLen = ('HIV Epidemic Changes Among '+titleDict[name]+" for New York State").length;
   svg.append("text")
