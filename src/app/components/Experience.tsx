@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { BriefcaseIcon } from '@heroicons/react/24/outline'
 
 const experiences = [
@@ -40,13 +39,9 @@ export default function Experience() {
             <div className="absolute left-0 top-0 w-0.5 h-full bg-gray-200" />
 
             {/* Experience items */}
-            {experiences.map((experience, index) => (
-              <motion.div
+            {experiences.map((experience) => (
+              <div
                 key={experience.date}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                viewport={{ once: true }}
                 className="relative mb-16 last:mb-0"
               >
                 {/* Timeline dot */}
@@ -78,7 +73,7 @@ export default function Experience() {
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

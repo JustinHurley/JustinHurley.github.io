@@ -1,5 +1,6 @@
 import { CodeBracketIcon, CommandLineIcon, CpuChipIcon } from '@heroicons/react/24/outline'
 
+
 const skills = [
   {
     name: 'Frontend Development',
@@ -27,7 +28,7 @@ export default function About() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <p className="text-lg leading-8 text-gray-600">
-            I'm a software engineer passionate about building innovative solutions to complex problems. 
+            I&apos;m a software engineer passionate about building innovative solutions to complex problems. 
             With a strong foundation in both frontend and backend development, I create efficient, 
             scalable, and user-friendly applications.
           </p>

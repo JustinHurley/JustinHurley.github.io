@@ -1,7 +1,6 @@
 import Header from './components/Header'
 import About from './components/About'
 import Experience from './components/Experience'
-import { motion } from 'framer-motion'
 
 export default function Home() {
   return (
@@ -11,12 +10,7 @@ export default function Home() {
       {/* Hero Section */}
       <div className="relative isolate overflow-hidden bg-white">
         <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40">
-          <motion.div
-            className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
             <h1 className="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
               Software Engineer
             </h1>
@@ -35,7 +29,7 @@ export default function Home() {
                 View projects <span aria-hidden="true">→</span>
               </a>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
