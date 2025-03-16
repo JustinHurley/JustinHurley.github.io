@@ -9,6 +9,25 @@ export const metadata: Metadata = {
   description: 'Software Engineer',
 }
 
+function setInitialTheme() {
+  return {
+    __html: `
+      (function() {
+        try {
+          const savedTheme = localStorage.getItem('theme')
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+          
+          if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add('dark')
+          } else {
+            document.documentElement.classList.remove('dark')
+          }
+        } catch (e) {}
+      })()
+    `,
+  }
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -17,28 +36,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                function getInitialTheme() {
-                  const savedTheme = localStorage.getItem('theme')
-                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-                  
-                  return savedTheme === 'dark' || (!savedTheme && prefersDark) ? 'dark' : 'light'
-                }
-
-                const theme = getInitialTheme()
-                
-                if (theme === 'dark') {
-                  document.documentElement.classList.add('dark')
-                }
-              })()
-            `,
-          }}
-        />
+        <script dangerouslySetInnerHTML={setInitialTheme()} />
       </head>
-      <body className={`${inter.className} transition-colors`}>{children}</body>
+      <body className={`${inter.className} antialiased`}>{children}</body>
     </html>
   )
 }
