@@ -7,37 +7,30 @@ export default function ThemeToggle() {
   const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
-    // Check if there's a theme preference in localStorage
-    const savedTheme = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-
-    // Set initial theme based on localStorage or system preference
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      document.documentElement.classList.add('dark')
-      setDarkMode(true)
-    } else {
-      document.documentElement.classList.remove('dark')
-      setDarkMode(false)
-    }
+    // Check if dark mode is enabled
+    const isDark = document.documentElement.classList.contains('dark')
+    setDarkMode(isDark)
   }, [])
 
   const toggleDarkMode = () => {
+    const html = document.documentElement
     const newDarkMode = !darkMode
-    setDarkMode(newDarkMode)
-    
-    // Update localStorage and document class
-    localStorage.setItem('theme', newDarkMode ? 'dark' : 'light')
+
     if (newDarkMode) {
-      document.documentElement.classList.add('dark')
+      html.classList.add('dark')
+      localStorage.theme = 'dark'
     } else {
-      document.documentElement.classList.remove('dark')
+      html.classList.remove('dark')
+      localStorage.theme = 'light'
     }
+
+    setDarkMode(newDarkMode)
   }
 
   return (
     <button
       onClick={toggleDarkMode}
-      className="fixed top-20 right-4 z-50 p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+      className="fixed top-20 right-4 z-[100] p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
       aria-label="Toggle dark mode"
     >
       {darkMode ? (

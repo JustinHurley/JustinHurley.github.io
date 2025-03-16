@@ -14,15 +14,13 @@ function setInitialTheme() {
     __html: `
       (function() {
         try {
-          const savedTheme = localStorage.getItem('theme')
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-          
-          if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+          const darkMode = localStorage.theme === 'dark' || (!localStorage.theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
+          if (darkMode) {
             document.documentElement.classList.add('dark')
-          } else {
-            document.documentElement.classList.remove('dark')
           }
-        } catch (e) {}
+        } catch (e) {
+          console.error('Error setting initial theme:', e)
+        }
       })()
     `,
   }
@@ -38,7 +36,9 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={setInitialTheme()} />
       </head>
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={inter.className}>
+        {children}
+      </body>
     </html>
   )
 }
