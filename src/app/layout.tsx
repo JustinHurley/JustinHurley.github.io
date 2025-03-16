@@ -5,8 +5,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Your Name - Software Engineer',
-  description: 'Personal website and portfolio showcasing software engineering experience and projects',
+  title: 'Justin Hurley',
+  description: 'Software Engineer',
 }
 
 export default function RootLayout({
@@ -15,12 +15,30 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="h-full bg-gray-50">
-      <body className={`${inter.className} h-full`}>
-        <div className="min-h-full">
-          {children}
-        </div>
-      </body>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                function getInitialTheme() {
+                  const savedTheme = localStorage.getItem('theme')
+                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+                  
+                  return savedTheme === 'dark' || (!savedTheme && prefersDark) ? 'dark' : 'light'
+                }
+
+                const theme = getInitialTheme()
+                
+                if (theme === 'dark') {
+                  document.documentElement.classList.add('dark')
+                }
+              })()
+            `,
+          }}
+        />
+      </head>
+      <body className={`${inter.className} transition-colors`}>{children}</body>
     </html>
   )
 }
