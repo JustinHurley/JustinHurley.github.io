@@ -67,7 +67,7 @@ export default function Experience() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <p className="text-lg leading-8 text-gray-600">
-            My professional journey in software development, from research and academia to industry roles at major tech companies.
+            My professional journey in software development!
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl lg:mt-20">
