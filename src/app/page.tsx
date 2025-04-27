@@ -2,12 +2,10 @@ import Header from './components/Header'
 import About from './components/About'
 import Experience from './components/Experience'
 import Education from './components/Education'
-import ThemeToggle from './components/ThemeToggle'
 
 export default function Home() {
   return (
     <main className="bg-white dark:bg-gray-900 transition-colors pt-16">
-      <ThemeToggle />
       <Header />
       
       {/* Hero Section */}
